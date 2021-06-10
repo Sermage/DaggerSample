@@ -12,12 +12,20 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        getAppComponent().inject(this)
-
+        val appComponent= getAppComponent()
+        getActivityComponent(appComponent).inject(this)
     }
 
     private fun getAppComponent():AppComponent{
         return DaggerAppComponent.builder()
+            .build()
+    }
+
+    private fun getActivityComponent(
+        appComponent: AppComponent
+    ):ActivityComponent{
+        return DaggerActivityComponent.builder()
+            .appComponent(appComponent)
             .appModule(AppModule())
             .build()
     }

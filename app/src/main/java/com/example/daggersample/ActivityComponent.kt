@@ -5,5 +5,5 @@ import dagger.Component
 @ActivityScope
 @Component(dependencies = [AppComponent::class],modules = [ActivityModule::class])
 interface ActivityComponent {
-    fun getPresenter():Presenter
+    fun inject(activity: MainActivity)
 }
